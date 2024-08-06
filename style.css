@@ -1,0 +1,58 @@
+* {
+  font-family: "Roboto Mono", monospace;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: calc(100% - 80px);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #23b3db;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #008cb3;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

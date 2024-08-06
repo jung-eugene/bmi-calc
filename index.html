@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bmi calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      let isMetric = true;
+
+      // Toggle between metric and imperial
+      function toggleUnits() {
+        isMetric = !isMetric;
+
+        document.getElementById("height").placeholder = isMetric
+          ? "Enter height (cm)"
+          : "Enter height (ft)";
+        document.getElementById("weight").placeholder = isMetric
+          ? "Enter weight (kg)"
+          : "Enter weight (lbs)";
+        document.getElementById("unitToggle").innerText = isMetric
+          ? "Switch to Imperial"
+          : "Switch to Metric";
+        document.getElementById("weight").value = "";
+        document.getElementById("height").value = "";
+        document.getElementById("result").innerText = "";
+      }
+
+      // Calculate BMI based on given weight and height values
+      function calculateBMI() {
+        let height = parseFloat(document.getElementById("height").value);
+        let weight = parseFloat(document.getElementById("weight").value);
+
+        if (!weight || !height) {
+          document.getElementById("result").innerText =
+            "Please enter valid height and weight.";
+          return;
+        }
+
+        if (!isMetric) {
+          // Convert lbs to kg and ft to m
+          weight = weight * 0.453592;
+          height = height * 0.3048;
+        } else {
+          // Convert cm to m
+          height = height / 100;
+        }
+
+        const bmi = weight / height ** 2;
+        const roundedBMI = bmi.toFixed(2);
+        let category = "";
+
+        // Display BMI result and message based on value
+        if (bmi < 18.5) {
+          category = "Underweight";
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+          category = "Normal weight";
+        } else if (bmi >= 25 && bmi < 29.9) {
+          category = "Overweight";
+        } else {
+          category = "Obesity";
+        }
+
+        document.getElementById(
+          "result"
+        ).innerText = `BMI: ${roundedBMI} - Category: ${category}`;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>BMI Calculator Plugin</h1>
+      <div class="toggle-container">
+        <button id="unitToggle" onclick="toggleUnits()">
+          Switch to Imperial
+        </button>
+      </div>
+      <input
+        type="number"
+        id="height"
+        placeholder="Enter height (cm)"
+        step="0.01"
+      />
+      <input
+        type="number"
+        id="weight"
+        placeholder="Enter weight (kg)"
+        step="0.1"
+      />
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <p id="result"></p>
+    </div>
+  </body>
+</html>
